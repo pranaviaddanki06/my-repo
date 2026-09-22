@@ -14,3 +14,62 @@
 .light .app{--bg:#f5f8f6;--surface:#fff;--surface2:#f0f5f2;--surface3:#e5eee9;--line:#d5e1db;--text:#15221d;--muted:#60736b;--green:#16885d;--green2:#0d704c;--amber:#9a6b00;--red:#c53b45;--blue:#315eaa;--shadow:0 18px 50px #16332612}
 
 .logoFallback{place-items:center}.landingLogo img + .logoFallback{display:none}.landingLogo img[style*="display: none"] + .logoFallback{display:grid}
+/* Vyapar Intelligence continuity layer — restrained monochrome product language */
+.app{
+  --bg:#070707;--surface:#0d0d0e;--surface2:#131314;--surface3:#19191a;
+  --line:rgba(255,255,255,.10);--text:#f5f5f3;--muted:#929292;
+  --green:#a4c7ba;--green2:#89aa9f;--amber:#c7b57b;--red:#c88c91;--blue:#9caec9;
+  --shadow:0 24px 70px rgba(0,0,0,.42);
+  background:var(--bg);color:var(--text);
+}
+.light .app{
+  --bg:#f5f5f3;--surface:#ffffff;--surface2:#f0f0ee;--surface3:#e7e7e4;
+  --line:rgba(17,17,17,.11);--text:#171717;--muted:#6f6f6c;
+  --green:#5d8074;--green2:#48695f;--amber:#866f2d;--red:#9b5f67;--blue:#526b91;
+  --shadow:0 18px 50px rgba(0,0,0,.08);
+}
+.app{font-family:var(--font-sans);background:var(--bg)}
+.app .side{background:rgba(10,10,10,.94);border-right-color:var(--line);backdrop-filter:blur(18px)}
+.light .app .side{background:rgba(248,248,246,.94)}
+.app .brand{font-family:var(--font-sans);font-size:15px;letter-spacing:.02em;color:var(--text)}
+.app .brand b{color:var(--text);display:block;font-weight:500;letter-spacing:.18em;font-size:9px;margin-top:4px}
+.app .brand small{color:var(--muted);letter-spacing:.14em}
+.app .navHead{color:#777}
+.app .navItem{color:#8a8a8a;transition:background .2s,color .2s,transform .2s}
+.app .navItem:hover,.app .navItem.active{background:rgba(255,255,255,.055);color:var(--text)}
+.app .navItem.active{box-shadow:inset 1px 0 var(--green)}
+.app .profileMini{border-top-color:var(--line)}
+.app .avatar,.app .avatarBig{background:var(--surface3);color:var(--text)}
+.app .top{background:rgba(7,7,7,.82);border-bottom-color:var(--line);backdrop-filter:blur(18px)}
+.light .app .top{background:rgba(245,245,243,.84)}
+.app .crumb,.app .crumbs{color:var(--muted)}
+.app .crumb b,.app .crumbs b{color:var(--text)}
+.app .content{animation:productIn .42s cubic-bezier(.22,1,.36,1)}
+@keyframes productIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.app .pageHead h1{font-family:var(--font-sans);font-weight:500;letter-spacing:-.055em}
+.app .eyebrow,.app .upv,.app .score{color:var(--green)}
+.app .card,.app .kpi,.app .healthBox{background:var(--surface);border-color:var(--line);box-shadow:none}
+.app .card{border-radius:12px}
+.app .kpi{border-radius:10px}
+.app .card:hover,.app .kpi:hover{border-color:rgba(255,255,255,.16)}
+.light .app .card:hover,.light .app .kpi:hover{border-color:rgba(17,17,17,.16)}
+.app .section{color:#777}
+.app .btn,.app .iconBtn,.app .select,.app input{background:var(--surface);border-color:var(--line);color:var(--text)}
+.app .btn:hover,.app .iconBtn:hover{border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
+.light .app .btn:hover,.light .app .iconBtn:hover{border-color:rgba(17,17,17,.25)}
+.app .btn.primary{background:#f2f2f0;color:#111;border-color:#f2f2f0}
+.light .app .btn.primary{background:#171717;color:#fff;border-color:#171717}
+.app .bar i{background:var(--green)}
+.app .line{stroke:var(--green)}
+.app .area{fill:rgba(164,199,186,.10)}
+.app .signal{border-left-color:var(--green);background:var(--surface2)}
+.app .num{background:var(--surface2);color:var(--text)}
+.app .pill{background:var(--surface2);border-color:var(--line)}
+.app .pill.good{color:var(--green);border-color:rgba(164,199,186,.35)}
+.app .pill.warn{color:var(--amber);border-color:rgba(199,181,123,.35)}
+.app .pill.bad{color:var(--red);border-color:rgba(200,140,145,.35)}
+.app .range{accent-color:var(--green)}
+.app .switch.on{background:var(--green)}
+.app .toast{border-color:var(--line)}
+@media(max-width:720px){.app .side{background:rgba(10,10,10,.98)}.light .app .side{background:rgba(248,248,246,.98)}}
+@media(prefers-reduced-motion:reduce){.app .content{animation:none}}
