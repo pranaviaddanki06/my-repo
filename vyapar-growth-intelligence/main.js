@@ -1,5 +1,5 @@
 
-const views=[...document.querySelectorAll('.view')], nav=[...document.querySelectorAll('.navItem')], crumb=document.getElementById('crumb'), app=document.getElementById('app'), splash=document.getElementById('splash');
+const views=[...document.querySelectorAll('.view')], nav=[...document.querySelectorAll('.navItem')], crumb=document.getElementById('crumb'), app=document.getElementById('app');
 const labels={overview:'EXECUTIVE OVERVIEW',health:'BUSINESS HEALTH',growth:'GROWTH',revenue:'REVENUE',customers:'CUSTOMERS',products:'PRODUCTS',payments:'PAYMENTS',inventory:'INVENTORY',regions:'REGIONS',ai:'AI INSIGHTS',opportunities:'OPPORTUNITIES',risks:'RISKS & ANOMALIES',scenario:'SCENARIO LAB',recommendations:'RECOMMENDATIONS',reportExec:'EXECUTIVE REPORT',reportGrowth:'GROWTH REPORT',reportCustomer:'CUSTOMER REPORT',reportHealth:'BUSINESS HEALTH REPORT',methodology:'DATA & METHODOLOGY',profile:'PROFILE'};
 function go(id){if(!labels[id])return;views.forEach(v=>v.classList.toggle('active',v.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.go===id));crumb.textContent=labels[id];window.scrollTo({top:0,behavior:'smooth'});}
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
