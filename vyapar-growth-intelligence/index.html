@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Vyapar Growth Intelligence Engine</title>
+<meta name="description" content="A recruiter-facing product analytics case study for MSME growth intelligence."/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4"></script>
+<style>
+:root{--bg:#07110f;--panel:#0d1b18;--panel2:#11231f;--line:#1e3933;--text:#edf7f3;--muted:#91aaa3;--accent:#55e6b0;--accent2:#8ea7ff;--warn:#ffc857;--danger:#ff7180}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#14342d 0,transparent 32%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}a{color:inherit}.wrap{max-width:1420px;margin:auto;padding:26px 28px 70px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-weight:800;letter-spacing:.2px}.brand span{color:var(--accent)}.badge{border:1px solid #28554a;border-radius:999px;padding:8px 13px;color:#b9d2cb;font-size:12px;background:#0b1916}.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:20px;align-items:stretch}.heroCard,.panel{background:linear-gradient(145deg,rgba(18,37,32,.96),rgba(10,24,21,.96));border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 60px rgba(0,0,0,.2)}.heroCard{padding:34px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.14em}.hero h1{font-size:clamp(34px,5vw,64px);line-height:.98;margin:12px 0 18px;max-width:850px}.hero p{font-size:17px;line-height:1.65;color:#a9beb8;max-width:800px}.actions{display:flex;gap:10px;margin-top:25px;flex-wrap:wrap}.btn{padding:11px 15px;border-radius:12px;border:1px solid #2a5047;background:#10241f;text-decoration:none;font-weight:700;font-size:13px}.btn.primary{background:var(--accent);color:#062019;border-color:var(--accent)}.signal{padding:28px;display:flex;flex-direction:column;justify-content:space-between}.signal .big{font-size:52px;font-weight:850;color:var(--accent);margin-top:14px}.signal small{color:var(--muted);line-height:1.5}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.kpi{padding:20px;border-radius:18px;background:#0c1b18;border:1px solid var(--line)}.kpi .label{font-size:12px;color:var(--muted)}.kpi .value{font-size:28px;font-weight:800;margin:7px 0}.delta{font-size:12px;color:var(--accent)}.section{margin-top:28px}.sectionHead{display:flex;justify-content:space-between;align-items:end;margin-bottom:13px}.sectionHead h2{margin:0;font-size:22px}.sectionHead p{margin:4px 0 0;color:var(--muted);font-size:13px}.two{display:grid;grid-template-columns:1.35fr .85fr;gap:14px}.panel{padding:22px}.chartBox{height:300px}.insights{display:grid;gap:10px}.insight{padding:15px;border:1px solid var(--line);border-radius:15px;background:#0b1916}.insight strong{display:block;margin-bottom:5px}.insight span{font-size:13px;line-height:1.5;color:#9fb5af}.risk{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.riskCard{padding:17px;border-radius:16px;border:1px solid var(--line);background:#0b1916}.riskNum{font-size:28px;font-weight:800}.pill{display:inline-block;padding:5px 8px;border-radius:999px;font-size:11px;margin-top:7px}.green{background:#103d31;color:#69efbd}.yellow{background:#403515;color:#ffd36a}.red{background:#401d24;color:#ff8894}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:13px 10px;text-align:left;border-bottom:1px solid var(--line)}.table th{color:#89a59d;font-size:11px;text-transform:uppercase;letter-spacing:.08em}.score{font-weight:800;color:var(--accent)}.footer{margin-top:30px;padding:18px 4px;color:#718b84;font-size:12px;line-height:1.6}.note{border-left:3px solid var(--accent);padding:12px 15px;background:#0b1916;border-radius:0 12px 12px 0;color:#9fb5af;font-size:12px;margin-top:13px}.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:13px}.tab{padding:8px 12px;border:1px solid var(--line);border-radius:10px;font-size:12px;color:#9fb5af}.tab.active{color:var(--accent);border-color:#2d6b5a;background:#10251f}@media(max-width:950px){.hero,.two{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.wrap{padding:18px 14px}.grid{grid-template-columns:1fr 1fr}.heroCard{padding:24px}.hero h1{font-size:40px}.risk{grid-template-columns:1fr}.top{align-items:flex-start;gap:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand">VYAPAR <span>×</span> ANALYTICS LAB</div><div class="badge">PORTFOLIO CASE STUDY · SYNTHETIC DATA</div></header>
+<section class="hero">
+<div class="heroCard"><div class="eyebrow">Growth Intelligence Engine</div><h1>Find the customers, features and signals that move retention.</h1><p>A recruiter-facing product analytics system modeled around an MSME SaaS business. It combines customer health scoring, feature adoption, retention cohorts, voice-of-customer signals and experiment analysis into one decision layer.</p><div class="actions"><a class="btn primary" href="#dashboard">Explore intelligence</a><a class="btn" href="#method">Methodology</a></div></div>
+<div class="panel signal"><div><div class="eyebrow">Decision signal</div><div class="big">72%</div><div style="font-weight:800;font-size:17px;margin-top:2px">of retained users adopted 3+ workflows</div></div><small>Illustrative finding from the synthetic portfolio dataset — not an internal Vyapar metric.</small></div>
+</section>
+
+<section id="dashboard" class="section">
+<div class="grid">
+<div class="kpi"><div class="label">ACTIVE CUSTOMERS</div><div class="value">18,420</div><div class="delta">↑ 8.6% MoM</div></div>
+<div class="kpi"><div class="label">30D RETENTION</div><div class="value">68.4%</div><div class="delta">↑ 4.2 pts</div></div>
+<div class="kpi"><div class="label">AT-RISK USERS</div><div class="value">2,146</div><div class="delta" style="color:var(--warn)">11.6% of active</div></div>
+<div class="kpi"><div class="label">FEATURE ADOPTION</div><div class="value">54.8%</div><div class="delta">↑ 6.9 pts</div></div>
+</div>
+<div class="sectionHead"><div><h2>Executive intelligence</h2><p>What the system would put in front of a product or growth team.</p></div></div>
+<div class="two">
+<div class="panel"><div class="tabs"><div class="tab active">Retention trend</div><div class="tab">Cohorts</div><div class="tab">Activity</div></div><div class="chartBox"><canvas id="retention"></canvas></div></div>
+<div class="panel"><h3 style="margin-top:0">Signals worth investigating</h3><div class="insights">
+<div class="insight"><strong>Multi-workflow adoption</strong><span>Users engaging with invoicing + inventory + payment reminders show materially stronger repeat activity in the simulated cohort.</span></div>
+<div class="insight"><strong>Early inactivity window</strong><span>Customers with a 7-day activity drop are the highest-leverage segment for proactive re-engagement.</span></div>
+<div class="insight"><strong>Customer voice</strong><span>Payment workflows and onboarding complexity are recurring themes in the public-review analysis layer.</span></div>
+<div class="insight"><strong>Next test</strong><span>Test industry-specific onboarding against the current generic flow and measure 30-day activation.</span></div>
+</div></div>
+</div>
+</section>
+
+<section class="section"><div class="sectionHead"><div><h2>Customer health engine</h2><p>From raw behavior to an explainable intervention queue.</p></div></div>
+<div class="panel"><div class="risk">
+<div class="riskCard"><div class="label">HEALTHY</div><div class="riskNum">12,874</div><span class="pill green">69.9%</span></div>
+<div class="riskCard"><div class="label">AT RISK</div><div class="riskNum">4,106</div><span class="pill yellow">22.3%</span></div>
+<div class="riskCard"><div class="label">CRITICAL</div><div class="riskNum">1,440</div><span class="pill red">7.8%</span></div>
+</div><div class="note"><b>Score logic:</b> recency + active days + invoice activity + workflow breadth + payment-reminder usage + 30-day activity trend. The score is designed to explain <i>why</i> a customer is at risk, not merely label them.</div></div></section>
+
+<section class="section"><div class="two">
+<div class="panel"><div class="sectionHead"><div><h2>Feature intelligence</h2><p>Adoption versus simulated retention relationship.</p></div></div><div class="chartBox"><canvas id="features"></canvas></div></div>
+<div class="panel"><div class="sectionHead"><div><h2>MSME opportunity map</h2><p>Illustrative segments prioritized for investigation.</p></div></div>
+<table class="table"><thead><tr><th>Segment</th><th>Users</th><th>Activation</th><th>Signal</th></tr></thead><tbody>
+<tr><td>Retail</td><td>5,420</td><td class="score">74%</td><td>High</td></tr>
+<tr><td>Services</td><td>4,180</td><td class="score">69%</td><td>High</td></tr>
+<tr><td>Wholesale</td><td>3,760</td><td>61%</td><td>Medium</td></tr>
+<tr><td>Manufacturing</td><td>2,110</td><td>52%</td><td>Explore</td></tr>
+<tr><td>Other</td><td>2,950</td><td>48%</td><td>Explore</td></tr>
+</tbody></table></div>
+</div></section>
+
+<section class="section" id="method"><div class="panel"><div class="sectionHead"><div><h2>Analytical stack</h2><p>A miniature product analytics function, built end-to-end.</p></div></div>
+<div class="grid" style="margin-bottom:0">
+<div class="kpi"><div class="label">01 · DATA</div><div style="font-weight:800;margin-top:8px">SQL warehouse</div><div class="label" style="margin-top:7px">Customers · invoices · transactions · feature usage · payments</div></div>
+<div class="kpi"><div class="label">02 · ANALYTICS</div><div style="font-weight:800;margin-top:8px">Python + statistics</div><div class="label" style="margin-top:7px">EDA · cohorts · segmentation · regression · hypothesis testing</div></div>
+<div class="kpi"><div class="label">03 · PREDICTION</div><div style="font-weight:800;margin-top:8px">Churn model</div><div class="label" style="margin-top:7px">Logistic regression / tree model + explainable drivers</div></div>
+<div class="kpi"><div class="label">04 · DECISION</div><div style="font-weight:800;margin-top:8px">BI + action layer</div><div class="label" style="margin-top:7px">Power BI concepts · experiment readout · next-best investigation</div></div>
+</div>
+<div class="note">This portfolio intentionally uses synthetic product data. Public app-review signals, where used, are treated separately and never presented as Vyapar internal data.</div></div></section>
+<footer class="footer">Built as a fresher Data Analyst portfolio case study · Product analytics · Customer analytics · MSME intelligence · Experimentation<br/>The goal is not to imitate internal Vyapar reporting, but to demonstrate how analytical thinking could be structured around a product serving small businesses.</footer>
+</div>
+<script>
+const grid={color:'#1e3933'};const ticks={color:'#77948b',font:{size:11}};
+new Chart(document.getElementById('retention'),{type:'line',data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'],datasets:[{label:'30-day retention',data:[58,59.5,60.8,62.1,63.7,65.2,66.1,67.5,68.4],borderColor:'#55e6b0',backgroundColor:'rgba(85,230,176,.10)',fill:true,tension:.35,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#a9beb8'}}},scales:{x:{grid, ticks},y:{grid,ticks,min:50,max:75,ticks:{...ticks,callback:v=>v+'%'}}}}});
+new Chart(document.getElementById('features'),{type:'bar',data:{labels:['Invoices','Inventory','Payments','Reminders','POS','Reports'],datasets:[{label:'Adoption %',data:[82,61,57,49,38,31],backgroundColor:'#55e6b0',borderRadius:7}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks},y:{grid,ticks,min:0,max:100,ticks:{...ticks,callback:v=>v+'%'}}}}});
+</script>
+</body></html>
