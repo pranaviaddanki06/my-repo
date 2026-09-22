@@ -1,6 +1,6 @@
 
 const views=[...document.querySelectorAll('.view')], nav=[...document.querySelectorAll('.navItem')], crumb=document.getElementById('crumb'), app=document.getElementById('app'), splash=document.getElementById('splash');
-const labels={overview:'EXECUTIVE OVERVIEW',health:'BUSINESS HEALTH',growth:'GROWTH',revenue:'REVENUE',customers:'CUSTOMERS',products:'PRODUCTS',payments:'PAYMENTS',inventory:'INVENTORY',regions:'REGIONS',ai:'AI INSIGHTS',opportunities:'OPPORTUNITIES',risks:'RISKS & ANOMALIES',scenario:'SCENARIO LAB',recommendations:'RECOMMENDATIONS',reportExec:'EXECUTIVE REPORT',reportGrowth:'GROWTH REPORT',reportCustomer:'CUSTOMER REPORT',reportHealth:'BUSINESS HEALTH REPORT',profile:'PROFILE'};
+const labels={overview:'EXECUTIVE OVERVIEW',health:'BUSINESS HEALTH',growth:'GROWTH',revenue:'REVENUE',customers:'CUSTOMERS',products:'PRODUCTS',payments:'PAYMENTS',inventory:'INVENTORY',regions:'REGIONS',ai:'AI INSIGHTS',opportunities:'OPPORTUNITIES',risks:'RISKS & ANOMALIES',scenario:'SCENARIO LAB',recommendations:'RECOMMENDATIONS',reportExec:'EXECUTIVE REPORT',reportGrowth:'GROWTH REPORT',reportCustomer:'CUSTOMER REPORT',reportHealth:'BUSINESS HEALTH REPORT',methodology:'DATA & METHODOLOGY',profile:'PROFILE'};
 function go(id){if(!labels[id])return;views.forEach(v=>v.classList.toggle('active',v.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.go===id));crumb.textContent=labels[id];window.scrollTo({top:0,behavior:'smooth'});}
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
 document.querySelectorAll('[data-toggle]').forEach(h=>h.addEventListener('click',()=>{const box=document.getElementById(h.dataset.toggle);box.classList.toggle('closed');h.querySelector('span').textContent=box.classList.contains('closed')?'⌄':'⌃'}));
@@ -26,3 +26,21 @@ document.querySelectorAll('[data-action="account"]').forEach(b=>b.onclick=()=>to
 renderCustomers();calc();
 
 (function(){const splash=document.getElementById('splash'),landing=document.getElementById('landing'),app=document.getElementById('app'),enter=document.getElementById('enter'),start=document.getElementById('getStarted');enter.onclick=()=>{splash.classList.add('out');landing.classList.add('show');setTimeout(()=>splash.remove(),700)};start.onclick=()=>{landing.classList.add('leaving');setTimeout(()=>{landing.classList.remove('show','leaving');app.classList.add('ready');go('overview')},420)};const goApp=()=>{landing.classList.remove('show');app.classList.add('ready');go('overview')};document.querySelectorAll('[data-land]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.land;document.querySelectorAll('.landLink,.mobileLink').forEach(x=>x.classList.toggle('active',x.dataset.land===a));if(a==='home')return;if(a==='product'){goApp();toast('Product workspace opened.')}if(a==='cases'){goApp();go('ai');toast('Decision Lab opened.')}if(a==='contact')toast('Contact: marketing@vyaparapp.in');if(a==='signin'){goApp();go('profile')}if(b.classList.contains('mobileLink'))closeMenu()}));document.getElementById('landingLogo').onclick=()=>{landing.classList.add('show');app.classList.remove('ready')};const burger=document.getElementById('burger'),overlay=document.getElementById('mobileOverlay');function closeMenu(){burger.classList.remove('open');burger.setAttribute('aria-expanded','false');overlay.hidden=true;document.body.classList.remove('menu-open')}burger.onclick=()=>{const open=!burger.classList.contains('open');burger.classList.toggle('open',open);burger.setAttribute('aria-expanded',String(open));overlay.hidden=!open;document.body.classList.toggle('menu-open',open)};overlay.onclick=e=>{if(e.target===overlay)closeMenu()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});window.addEventListener('resize',()=>{if(innerWidth>720)closeMenu()});const stats=document.getElementById('stats'),els=[...document.querySelectorAll('.count')];let done=false;function count(){if(done)return;done=true;els.forEach((el,i)=>{const target=+el.dataset.target,dec=+el.dataset.decimals||0,dur=1500+i*80,start=performance.now()+480+i*90;function tick(now){if(now<start)return requestAnimationFrame(tick);const p=Math.min(1,(now-start)/dur),e=1-Math.pow(1-p,3);el.textContent=(target*e).toFixed(dec);if(p<1)requestAnimationFrame(tick);else el.textContent=target.toFixed(dec)}requestAnimationFrame(tick)})}new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&count()),{threshold:.25}).observe(stats)})();
+(async function loadAnalyticalEvidence(){
+  try{
+    const r=await fetch('analytics/metrics.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('metrics unavailable');
+    const m=await r.json();
+    const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+    set('mRows',m.dataset.transactions.toLocaleString('en-IN'));
+    set('mCustomers',m.dataset.customers.toLocaleString('en-IN'));
+    set('mRetention',m.business.retention_30d.toFixed(1)+'%');
+    set('mCollection',m.business.collection_rate.toFixed(1)+'%');
+    set('mLift','+'+m.analysis.retention_lift_pp.toFixed(1)+' pts');
+    set('mLow',m.analysis.retention_low_depth.toFixed(1)+'%');
+    set('mHigh',m.analysis.retention_high_depth.toFixed(1)+'%');
+    set('mCorr',m.analysis.feature_depth_retention_corr.toFixed(3));
+  }catch(e){
+    const s=document.getElementById('pipelineStatus'); if(s){s.textContent='STATIC EVIDENCE';s.classList.add('warn')}
+  }
+})();
