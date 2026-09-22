@@ -121,4 +121,15 @@
 <footer style="margin-top:32px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:8px;line-height:1.7">Portfolio disclosure: this is a simulated Growth Intelligence product built by Pranavi Addanki. Metrics and customer records are synthetic/model inputs and are not Vyapar internal performance. Analytical evidence is reproducible from the analytics folder using deterministic synthetic data; no proprietary access is claimed.</footer>
 </div></main></div>
 <div class="modal" id="modal"><div class="modalBox"><div class="modalHead"><h3 id="modalTitle">Detail</h3><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div><div class="toast" id="toast"></div>
-<script src="main.js"></script></body></html>
+<script src="main.js"></script><button class="assistantFab" id="assistantFab" aria-label="Open Vyapar Intelligence Assistant" title="Vyapar Intelligence Assistant"><span class="assistantOrb">✦</span><span class="assistantFabText">Ask Vyapar</span></button>
+<aside class="assistantPanel" id="assistantPanel" aria-label="Vyapar Intelligence Assistant" aria-hidden="true">
+  <div class="assistantHead"><div><div class="assistantKicker">VYAPAR INTELLIGENCE</div><h2>Decision Assistant</h2><p>Ask about metrics, signals, risks or methodology.</p></div><button class="assistantClose" id="assistantClose" aria-label="Close assistant">×</button></div>
+  <div class="assistantSuggestions" id="assistantSuggestions">
+    <button data-prompt="What are the biggest risks right now?">Biggest risks</button>
+    <button data-prompt="What is driving growth?">Growth drivers</button>
+    <button data-prompt="Explain the retention finding">Retention finding</button>
+  </div>
+  <div class="assistantMessages" id="assistantMessages" aria-live="polite"><div class="assistantMsg assistant"><span class="msgLabel">VYAPAR AI</span><p>I’m your decision assistant. I can explain the modeled KPIs, surface signals, and translate them into next-step investigations.</p></div></div>
+  <form class="assistantForm" id="assistantForm"><input id="assistantInput" autocomplete="off" placeholder="Ask a business question…" aria-label="Ask a business question"><button type="submit" aria-label="Send">↑</button></form>
+  <div class="assistantNote">Modeled portfolio data · AI responses are decision support, not company forecasts.</div>
+</aside></body></html>
