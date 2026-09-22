@@ -1,0 +1,7 @@
+{
+  "dataset":{"transactions":12000,"customers":2189,"regions":4,"seed":42},
+  "business":{"revenue":43039539.03,"collection_rate":90.3,"retention_30d":69.7,"avg_overdue_days":7.0,"at_risk_customers":537},
+  "analysis":{"retention_low_depth":49.5,"retention_high_depth":87.6,"retention_lift_pp":38.1,"feature_depth_retention_corr":0.313},
+  "regional_contribution":{"East":17.6,"North":22.8,"South":32.3,"West":27.4},
+  "validation":{"null_rows":0,"duplicate_rows":0,"positive_amount_rows":12000}
+}
