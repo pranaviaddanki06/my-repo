@@ -44,50 +44,51 @@ renderCustomers();calc();
     const s=document.getElementById('pipelineStatus'); if(s){s.textContent='STATIC EVIDENCE';s.classList.add('warn')}
   }
 })();
-/* Vyapar Decision Assistant — contextual portfolio intelligence */
+/* Vyapar Decision Assistant — LLM-backed with safe local fallback */
 (function initAssistant(){
   const fab=document.getElementById('assistantFab'),panel=document.getElementById('assistantPanel'),close=document.getElementById('assistantClose');
   const form=document.getElementById('assistantForm'),input=document.getElementById('assistantInput'),messages=document.getElementById('assistantMessages');
   if(!fab||!panel||!form)return;
   const context={
-    revenue:'₹8.42Cr, up 12.8%',
-    customers:'18,420 active customers, up 8.6%',
-    retention:'68.4% 30-day retention, up 4.2 points',
-    cac:'₹1,840 CAC, down 6.1%',
-    clv:'₹24,680 CLV, up 9.7%',
-    risk:'2,146 at-risk customers',
-    overdue:'₹24.6L overdue with 77.8% collection health',
-    inventory:'436 low-stock-risk SKUs, 219 overstock and 73 expiry-risk SKUs',
+    revenue:'₹8.42Cr, up 12.8%',customers:'18,420 active customers, up 8.6%',retention:'68.4% 30-day retention, up 4.2 points',
+    cac:'₹1,840 CAC, down 6.1%',clv:'₹24,680 CLV, up 9.7%',risk:'2,146 at-risk customers',
+    overdue:'₹24.6L overdue with 77.8% collection health',inventory:'436 low-stock-risk SKUs, 219 overstock and 73 expiry-risk SKUs',
     evidence:'12,000 synthetic transactions, 2,189 customers, 69.7% modeled 30-day retention and 90.3% collection rate',
     finding:'workflow depth is associated with retention: shallow workflow retention 49.5% versus deep workflow retention 87.6%, a +38.1 point modeled lift; correlation is 0.313 and is not causal proof'
   };
+  const transcript=[];
   function open(){panel.classList.add('open');panel.setAttribute('aria-hidden','false');setTimeout(()=>input.focus(),180)}
   function shut(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true')}
-  fab.onclick=open;close.onclick=shut;
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
+  fab.onclick=open;close.onclick=shut;document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
   function add(text,who){
     const el=document.createElement('div');el.className='assistantMsg '+who;
     const label=document.createElement('span');label.className='msgLabel';label.textContent=who==='user'?'YOU':'VYAPAR AI';
     const p=document.createElement('p');p.textContent=text;el.append(label,p);messages.appendChild(el);messages.scrollTop=messages.scrollHeight;
   }
-  function answer(q){
+  function localAnswer(q){
     const s=q.toLowerCase();
-    if(/risk|problem|attention|concern/.test(s)) return 'The main modeled queues are 2,146 at-risk customers, ₹24.6L overdue payments, and 436 low-stock-risk SKUs. I would investigate high-value at-risk accounts first, then prioritize collections and inventory exceptions.';
-    if(/growth|grow|driver/.test(s)) return 'Growth is modeled at +12.8%. The dashboard points to retention, deeper workflow activation and expansion as the key investigation areas rather than assuming acquisition is the only driver.';
-    if(/retention|churn|workflow|activation|feature/.test(s)) return 'The reproducible analysis shows 49.5% retention for shallow workflow users versus 87.6% for deep workflow users: a +38.1 point association. Correlation is 0.313. This is a diagnostic signal, not evidence that workflow depth causes retention.';
-    if(/revenue|sales|income/.test(s)) return 'Modeled revenue is ₹8.42Cr, up 12.8%. The Executive Overview also flags revenue growth as faster than customer growth, so expansion and usage depth are worth investigating.';
-    if(/customer|client|segment/.test(s)) return 'There are 18,420 active customers, with 2,146 modeled as at risk. Open Customers to filter by region and segment, then drill into individual accounts.';
-    if(/payment|collection|overdue|receivable/.test(s)) return 'Payment health is 77.8%, with ₹24.6L overdue and an average modeled delay of 9.6 days. Prioritize the queue by account value and overdue days.';
-    if(/inventory|stock|sku/.test(s)) return 'Inventory shows 436 low-stock-risk SKUs, 219 overstock items and 73 expiry-risk items. Open Inventory to investigate operational exceptions.';
-    if(/data|method|synthetic|evidence|sql|python/.test(s)) return 'The evidence layer is reproducible: 12,000 synthetic transaction rows, 2,189 customers, deterministic seed 42, SQL transformation schema and a Python analysis workflow with quality checks. No proprietary Vyapar data is claimed.';
-    if(/hello|hi|hey/.test(s)) return 'Hello. Ask me about growth, revenue, customers, retention, payments, inventory, risks or the analytical methodology.';
-    return 'I can help interpret the modeled Vyapar workspace. Try asking: “What is driving growth?”, “What are the biggest risks?”, “Explain the retention finding”, or “How was the evidence generated?”';
+    if(/risk|problem|attention|concern/.test(s))return 'The main modeled queues are 2,146 at-risk customers, ₹24.6L overdue payments, and 436 low-stock-risk SKUs. I would investigate high-value at-risk accounts first, then prioritize collections and inventory exceptions.';
+    if(/growth|grow|driver/.test(s))return 'Growth is modeled at +12.8%. The dashboard points to retention, deeper workflow activation and expansion as key investigation areas rather than assuming acquisition is the only driver.';
+    if(/retention|churn|workflow|activation|feature/.test(s))return 'The reproducible analysis shows 49.5% retention for shallow workflow users versus 87.6% for deep workflow users: a +38.1 point association. Correlation is 0.313. This is a diagnostic signal, not evidence that workflow depth causes retention.';
+    if(/revenue|sales|income/.test(s))return 'Modeled revenue is ₹8.42Cr, up 12.8%. The Executive Overview also flags revenue growth as faster than customer growth, so expansion and usage depth are worth investigating.';
+    if(/customer|client|segment/.test(s))return 'There are 18,420 active customers, with 2,146 modeled as at risk. Open Customers to filter by region and segment, then drill into individual accounts.';
+    if(/payment|collection|overdue|receivable/.test(s))return 'Payment health is 77.8%, with ₹24.6L overdue and an average modeled delay of 9.6 days. Prioritize the queue by account value and overdue days.';
+    if(/inventory|stock|sku/.test(s))return 'Inventory shows 436 low-stock-risk SKUs, 219 overstock items and 73 expiry-risk items. Open Inventory to investigate operational exceptions.';
+    if(/data|method|synthetic|evidence|sql|python/.test(s))return 'The evidence layer is reproducible: 12,000 synthetic transaction rows, 2,189 customers, deterministic seed 42, SQL transformation schema and a Python analysis workflow with quality checks. No proprietary Vyapar data is claimed.';
+    return 'I can help interpret the modeled Vyapar workspace. Try asking about growth, revenue, customers, retention, payments, inventory, risks, or methodology.';
   }
-  function ask(q){
-    if(!q.trim())return;
-    add(q.trim(),'user');input.value='';
+  async function ask(q){
+    q=q.trim();if(!q)return;
+    add(q,'user');transcript.push({role:'user',content:q});input.value='';
     const typing=document.createElement('div');typing.className='assistantMsg assistant assistantTyping';typing.innerHTML='<span class="msgLabel">VYAPAR AI</span><p><span></span><span></span><span></span></p>';messages.appendChild(typing);messages.scrollTop=messages.scrollHeight;
-    setTimeout(()=>{typing.remove();add(answer(q),'assistant')},420);
+    try{
+      const res=await fetch('api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:transcript.slice(-8),context})});
+      if(!res.ok)throw new Error('AI request failed');
+      const data=await res.json();const answer=data.answer||localAnswer(q);
+      typing.remove();add(answer,'assistant');transcript.push({role:'assistant',content:answer});
+    }catch(e){
+      typing.remove();const answer=localAnswer(q);add(answer,'assistant');transcript.push({role:'assistant',content:answer});
+    }
   }
   form.onsubmit=e=>{e.preventDefault();ask(input.value)};
   document.querySelectorAll('.assistantSuggestions [data-prompt]').forEach(b=>b.onclick=()=>ask(b.dataset.prompt));
